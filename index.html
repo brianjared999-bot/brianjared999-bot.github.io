@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jared Brian | Virtual Assistant & Moderator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --card: #1a1a24;
+      --accent: #c8a96e;
+      --accent2: #7c6bff;
+      --text: #f0ede6;
+      --muted: #8a8799;
+      --border: rgba(200,169,110,0.15);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; background: rgba(10,10,15,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--accent); letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--accent); }
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 4rem 4rem; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 70% 50%, rgba(124,107,255,0.08) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,169,110,0.06) 0%, transparent 70%); }
+    .hero-line { position: absolute; top: 0; bottom: 0; left: 55%; width: 1px; background: linear-gradient(to bottom, transparent, var(--border), transparent); }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-tag { display: inline-block; background: rgba(200,169,110,0.1); border: 1px solid rgba(200,169,110,0.3); color: var(--accent); font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 2rem; animation: fadeUp 0.8s ease both; }
+    .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 900; line-height: 1; letter-spacing: -0.02em; margin-bottom: 1.5rem; animation: fadeUp 0.8s ease 0.1s both; }
+    .hero-name span { display: block; color: var(--accent); font-style: italic; }
+    .hero-desc { font-size: 1.1rem; color: var(--muted); line-height: 1.8; max-width: 500px; margin-bottom: 2.5rem; font-weight: 300; animation: fadeUp 0.8s ease 0.2s both; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.8s ease 0.3s both; }
+    .btn-primary { background: var(--accent); color: #0a0a0f; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.05em; transition: all 0.3s; }
+    .btn-primary:hover { background: #dfc08a; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(200,169,110,0.3); }
+    .btn-secondary { border: 1px solid var(--border); color: var(--text); padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none; font-weight: 400; font-size: 0.9rem; transition: all 0.3s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-stats { position: absolute; right: 4rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 2.5rem; animation: fadeUp 0.8s ease 0.4s both; }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--accent); display: block; }
+    .stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; }
+    section { padding: 6rem 4rem; position: relative; }
+    .section-header { margin-bottom: 4rem; }
+    .section-label { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; display: block; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.2; }
+    .about { background: var(--surface); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-text p { color: var(--muted); line-height: 1.9; font-size: 1rem; font-weight: 300; margin-bottom: 1.2rem; }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .detail-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+    .detail-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); }
+    .detail-value { font-size: 0.95rem; color: var(--text); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 2rem; transition: all 0.3s; position: relative; overflow: hidden; }
+    .skill-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .skill-card:hover::before { transform: scaleX(1); }
+    .skill-card:hover { border-color: rgba(200,169,110,0.3); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .skill-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .skill-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+    .experience { background: var(--surface); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent); }
+    .timeline-item { position: relative; padding-left: 2.5rem; padding-bottom: 3.5rem; }
+    .timeline-item::before { content: ''; position: absolute; left: -2.4rem; top: 0.35rem; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 15px rgba(200,169,110,0.5); }
+    .timeline-date { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .timeline-role { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .timeline-company { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; }
+    .timeline-points { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .timeline-points li { font-size: 0.9rem; color: var(--muted); padding-left: 1.2rem; position: relative; line-height: 1.6; }
+    .timeline-points li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; }
+    .education-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 2.5rem; transition: all 0.3s; }
+    .edu-card:hover { border-color: rgba(200,169,110,0.4); transform: translateY(-3px); }
+    .edu-year { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+    .edu-degree { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .edu-school { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; }
+    .edu-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+    .contact { background: var(--surface); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-intro { font-size: 1rem; color: var(--muted); line-height: 1.8; font-weight: 300; margin-bottom: 2.5rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; }
+    .contact-icon { width: 44px; height: 44px; background: rgba(200,169,110,0.1); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contact-info { display: flex; flex-direction: column; }
+    .contact-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .contact-value { font-size: 0.95rem; color: var(--text); }
+    .availability-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(100,220,100,0.08); border: 1px solid rgba(100,220,100,0.2); color: #7ddf7d; padding: 0.6rem 1.2rem; border-radius: 100px; font-size: 0.8rem; font-weight: 500; margin-top: 2rem; }
+    .availability-dot { width: 7px; height: 7px; background: #7ddf7d; border-radius: 50%; animation: pulse 2s infinite; }
+    footer { text-align: center; padding: 2.5rem 4rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) { nav { padding: 1.2rem 1.5rem; } .nav-links { display: none; } .hero { padding: 7rem 1.5rem 4rem; } .hero-stats, .hero-line { display: none; } section { padding: 4rem 1.5rem; } .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo">JB.</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-line"></div>
+    <div class="hero-content">
+      <div class="hero-tag">📍 Meru, Kenya · Open to Remote</div>
+      <h1 class="hero-name">Jared<span>Brian.</span></h1>
+      <p class="hero-desc">Administrative Virtual Assistant & Chat Moderator with hands-on experience delivering professional remote support, managing customer communications, and keeping digital communities safe and productive.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Get in Touch</a>
+        <a href="#experience" class="btn-secondary">View Experience</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Remote Ready</span></div>
+      <div class="stat"><span class="stat-num">24/7</span><span class="stat-label">Available</span></div>
+      <div class="stat"><span class="stat-num">2+</span><span class="stat-label">Years Exp.</span></div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="section-header reveal">
+      <span class="section-label">Who I Am</span>
+      <h2 class="section-title">Reliable. Professional.<br>Always Available.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm <strong>Jared Brian</strong>, a dedicated virtual professional based in Meru, Kenya, with a strong background in chat moderation, customer support, and administrative assistance.</p>
+        <p>My journey began with a degree in <strong>Education Science</strong> from Kenya Methodist University, which gave me deep interpersonal skills, patience, and the ability to engage effectively with people from all walks of life.</p>
+        <p>I further sharpened my digital capabilities at <strong>Moringa School</strong>, where I gained hands-on experience with modern tech tools, remote workflows, and professional digital communication.</p>
+        <p>I thrive in remote environments, take ownership of my tasks, and pride myself on delivering consistent, high-quality results with minimal supervision.</p>
+      </div>
+      <div class="reveal">
+        <div class="detail-row"><span class="detail-label">Location</span><span class="detail-value">Meru, Kenya</span></div>
+        <div class="detail-row"><span class="detail-label">Phone</span><span class="detail-value">+254700702097</span></div>
+        <div class="detail-row"><span class="detail-label">Email</span><span class="detail-value">brianjared999@gmail.com</span></div>
+        <div class="detail-row"><span class="detail-label">Languages</span><span class="detail-value">English (Native Level)</span></div>
+        <div class="detail-row"><span class="detail-label">Availability</span><span class="detail-value">All the time</span></div>
+        <div class="detail-row"><span class="detail-label">Work Type</span><span class="detail-value">Remote / Virtual</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-header reveal">
+      <span class="section-label">What I Bring</span>
+      <h2 class="section-title">Core Skills &<br>Competencies</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal"><div class="skill-icon">💬</div><h3 class="skill-title">Chat Moderation</h3><p class="skill-desc">Experienced in managing online communities, enforcing guidelines, handling difficult users calmly, and maintaining a safe and respectful digital environment.</p></div>
+      <div class="skill-card reveal"><div class="skill-icon">🗂️</div><h3 class="skill-title">Administrative Support</h3><p class="skill-desc">Proficient in email management, data entry, record keeping, scheduling, and handling inbound inquiries with accuracy and attention to detail.</p></div>
+      <div class="skill-card reveal"><div class="skill-icon">📧</div><h3 class="skill-title">Digital Communication</h3><p class="skill-desc">Skilled in Gmail, Google Workspace, Microsoft Teams, and social media platforms. Clear, professional written and verbal communication at all times.</p></div>
+      <div class="skill-card reveal"><div class="skill-icon">⚡</div><h3 class="skill-title">Multitasking & Prioritization</h3><p class="skill-desc">Able to manage multiple simultaneous conversations and tasks by prioritizing urgency, following structured workflows, and logging all interactions accurately.</p></div>
+      <div class="skill-card reveal"><div class="skill-icon">🤝</div><h3 class="skill-title">Customer Support</h3><p class="skill-desc">Empathetic and professional approach to customer service, ensuring every user feels heard, supported, and satisfied with their experience.</p></div>
+      <div class="skill-card reveal"><div class="skill-icon">💻</div><h3 class="skill-title">Tech Proficiency</h3><p class="skill-desc">Comfortable with Google Calendar, scheduling tools, CRM systems, social media platforms, and quick to adapt to new digital tools and platforms.</p></div>
+    </div>
+  </section>
+
+  <section class="experience" id="experience">
+    <div class="section-header reveal">
+      <span class="section-label">Work History</span>
+      <h2 class="section-title">Professional<br>Experience</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-date">2023 — Present</div>
+        <h3 class="timeline-role">Chat Moderator</h3>
+        <div class="timeline-company">Cloudworkers · Remote</div>
+        <ul class="timeline-points">
+          <li>Managed multiple simultaneous customer conversations while maintaining accuracy and professionalism at all times</li>
+          <li>Enforced community guidelines consistently, ensuring a safe and respectful environment for all users</li>
+          <li>Prioritized urgent inquiries first and logged every interaction using structured workflows</li>
+          <li>Maintained detailed interaction records and escalated complex issues appropriately and promptly</li>
+          <li>Delivered consistently high customer satisfaction through empathetic, clear, and timely responses</li>
+          <li>Worked independently in a fully remote setup, demonstrating strong self-discipline and reliability</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-header reveal">
+      <span class="section-label">Academic Background</span>
+      <h2 class="section-title">Education &<br>Training</h2>
+    </div>
+    <div class="education-grid">
+      <div class="edu-card reveal">
+        <div class="edu-year">Graduated 2023</div>
+        <h3 class="edu-degree">Education Science</h3>
+        <div class="edu-school">Kenya Methodist University · Meru, Kenya</div>
+        <p class="edu-desc">Developed strong interpersonal, communication, and analytical skills. Trained to engage diverse individuals with patience and empathy — competencies that translate directly into professional customer-facing roles and virtual assistance.</p>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">Technology Training</div>
+        <h3 class="edu-degree">Technology Training</h3>
+        <div class="edu-school">Moringa School · Kenya</div>
+        <p class="edu-desc">Gained practical skills in digital tools, online collaboration platforms, and tech-driven workflows. Built confidence navigating fast-paced digital environments — a key asset for high-quality remote and virtual assistant work.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="section-header reveal">
+      <span class="section-label">Let's Connect</span>
+      <h2 class="section-title">Get In<br>Touch</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="contact-intro">I am always open to new opportunities, collaborations, and projects. Whether you are looking for a reliable Virtual Assistant, a professional Moderator, or an all-round remote support specialist — I would love to hear from you.</p>
+        <div class="availability-badge"><span class="availability-dot"></span>Available for work · All time zones</div>
+      </div>
+      <div class="contact-items reveal">
+        <div class="contact-item"><div class="contact-icon">📧</div><div class="contact-info"><span class="contact-label">Email</span><span class="contact-value">brianjared999@gmail.com</span></div></div>
+        <div class="contact-item"><div class="contact-icon">📞</div><div class="contact-info"><span class="contact-label">Phone / WhatsApp</span><span class="contact-value">+254700702097</span></div></div>
+        <div class="contact-item"><div class="contact-icon">💼</div><div class="contact-info"><span class="contact-label">Microsoft Teams</span><span class="contact-value">brianjared999@gmail.com</span></div></div>
+        <div class="contact-item"><div class="contact-icon">📍</div><div class="contact-info"><span class="contact-label">Location</span><span class="contact-value">Meru, Kenya · Remote Worldwide</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer><p>© 2025 Jared Brian · Virtual Assistant & Moderator · Meru, Kenya</p></footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
