@@ -1,0 +1,80 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #0f172a;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px;
+            background: #1e293b;
+        }
+
+        header h1 {
+            font-size: 40px;
+        }
+
+        section {
+            padding: 40px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #38bdf8;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Your Name</h1>
+    <p>Customer Service | Problem Solver</p>
+</header>
+
+<section>
+    <div class="card">
+        <h2>About Me</h2>
+        <p>I am a motivated individual with strong communication skills and a passion for helping customers.</p>
+    </div>
+
+    <div class="card">
+        <h2>Skills</h2>
+        <ul>
+            <li>Communication</li>
+            <li>Customer Support</li>
+            <li>Problem Solving</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Projects</h2>
+        <p>Handled customer complaint simulations and resolved issues efficiently.</p>
+    </div>
+
+    <div class="card">
+        <h2>Contact</h2>
+        <p>Email: your@email.com</p>
+    </div>
+</section>
+
+</body>
+</html>
